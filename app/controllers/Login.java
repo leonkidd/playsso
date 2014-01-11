@@ -1,7 +1,11 @@
 package controllers;
 
+import java.io.File;
+
+import play.Application;
 import play.Play;
 import play.mvc.Controller;
+import play.mvc.Http.Context;
 import play.mvc.Result;
 import views.html.login;
 
@@ -15,7 +19,6 @@ public class Login extends Controller {
 	 * @return
 	 */
     public static Result page(String s, Boolean p, String c) {
-    	Play.application();
         return ok(login.render(s, p, c));
     }
 
@@ -26,7 +29,8 @@ public class Login extends Controller {
      * @return
      */
     public static Result auth(String u, String p, String c) {
-        return null;
+    	// validate u and p.
+        return redirect("");
     }
 
 }
