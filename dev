@@ -1,12 +1,17 @@
 https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1
 
-URLÖĞËù´ø²ÎÊı
-passive	±»¶¯£¬¼´ÊÇ·ñ±»¶¯µÇÂ¼£¬Ä¬ÈÏÎªfalse.
-rm	ÊÇ·ñÉ¾³ıËùÓĞµÇÂ¼×´Ì¬£¬Ä¬ÈÏÎªtrue.
+Loginçš„URLä¸­æ‰€å¸¦å‚æ•°
+passive	è¢«åŠ¨ï¼Œå³æ˜¯å¦è¢«åŠ¨ç™»å½•ï¼Œé»˜è®¤ä¸ºfalse.
+rm	æ˜¯å¦åˆ é™¤æ‰€æœ‰ç™»å½•çŠ¶æ€ï¼Œé»˜è®¤ä¸ºtrue.
 
-ËÑË÷Ò³ÖĞµãµÇÂ¼£¬url²ÎÊıÖĞ²»´øpassive¡£ÆäËûÏµÍ³ÖĞµãµÇÂ¼£¬url²ÎÊıÖĞpassive=true
-GAEÍË³ö£»ÔÙÀ´GmailÀïÒ»µã£¬¾Íµ½accountsÖĞµÇÂ¼Ò³Ãæ£»ËÑË÷Ò³ÃæÒ»Ë¢ĞÂ£¬µÇÂ¼×´Ì¬Ò²Ã»ÁË¡£ÍË³ö²ÎÊıÖĞÃ»ÓĞrm²ÎÊı
-GmailÍË³ö£ºGAE²»ÍË¡£	ÍË³ö²ÎÊıÖĞrm=false
+		passive		rm
+Gmail:	true		false
+GAE:	true		null
+æœç´¢:	null		null
 
+æœç´¢é¡µä¸­ç‚¹ç™»å½•ï¼Œurlå‚æ•°ä¸­ä¸å¸¦passiveã€‚å…¶ä»–ç³»ç»Ÿä¸­ç‚¹ç™»å½•ï¼Œurlå‚æ•°ä¸­passive=true
+GAEé€€å‡ºï¼›å†æ¥Gmailé‡Œä¸€ç‚¹ï¼Œå°±åˆ°accountsä¸­ç™»å½•é¡µé¢ï¼›æœç´¢é¡µé¢ä¸€åˆ·æ–°ï¼Œç™»å½•çŠ¶æ€ä¹Ÿæ²¡äº†ã€‚é€€å‡ºå‚æ•°ä¸­æ²¡æœ‰rmå‚æ•°
+Gmailé€€å‡ºï¼šGAEä¸é€€ã€‚	é€€å‡ºå‚æ•°ä¸­rm=false
 
-×ÓÏµÍ³ÊÇ·ñ±£´æsession
+å­ç³»ç»Ÿæ˜¯å¦ä¿å­˜session
+	å­ç³»ç»Ÿéƒ½ä¿å­˜å„è‡ªçš„sessionï¼Œå½“å‘ç”Ÿrm=trueçš„ç™»å‡ºæ—¶ï¼Œserverä¼šé€šçŸ¥å„clientåˆ é™¤session.
