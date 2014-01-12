@@ -1,1 +1,12 @@
 https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1
+
+URL中所带参数
+passive	被动，即是否被动登录，默认为false.
+rm	是否删除所有登录状态，默认为true.
+
+搜索页中点登录，url参数中不带passive。其他系统中点登录，url参数中passive=true
+GAE退出；再来Gmail里一点，就到accounts中登录页面；搜索页面一刷新，登录状态也没了。退出参数中没有rm参数
+Gmail退出：GAE不退。	退出参数中rm=false
+
+
+子系统是否保存session

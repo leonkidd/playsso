@@ -12,6 +12,13 @@ import play.mvc.Result;
 import views.html.login;
 import views.html.post;
 
+/**
+ * 登录事务处理
+ *
+ * @author Leon Kidd
+ * @version 1.00, 2014-1-12
+ * @since 1.0
+ */
 public class Login extends Controller {
 
 	/**
