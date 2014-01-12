@@ -10,7 +10,7 @@ GET		/assets/*file				controllers.Assets.at(path="/public", file)
 
 # Login
 GET		/login						controllers.Login.page(s, p: Boolean = true, c)
-POST	/auth						controllers.Login.auth(u, p, c)
+POST	/auth						controllers.Login.auth()
 
 # Token
 GET		/token						controllers.TokenValidation.index()
