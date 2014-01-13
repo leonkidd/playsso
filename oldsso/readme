@@ -1,0 +1,60 @@
+Simple Framework for SSO
+---------------------------------
+1.框架分为Client和Server两块:
+	Client是一个Filter, 加入到中Apps;
+	Server是一个Servlet, 实现用户登录模块后部署到Web容器.
+2.本框架只负责用户单点登录，统一登录，统一注销，应该不涉及任何用户权限的存储，权限应由各Apps自行管理。
+3.结构图如下图structure.gif
+4.交互流程图如下：
+Apps(Client)			Filter					SSOAuth(Server)
+							| <-- User
+		 <- has session ? - |
+doFilter <- Y --|			|
+		 -- N -------------	| -- goto with referer url --> has session ?
+							| <- goto with ticket -- Y ---
+							| -- check ticket with RPC --> delete ticket 
+							|				record app's url and user information
+doFilter <- add session --- | ---------- Y ----- RPC -----
+check error method <------- | ---------- N ----- RPC -----
+							|		 			|--- N --> Login <--|
+							|								|-- N --|
+							| -- goto with ticket ------------- Y --> add session
+							| ...
+							|
+
+
+*我的SSO规则
+1.一系统登录,全部登录.
+2.一系统登出,除独立外，全部登出.
+3.每次接收到请求都去Server上验证，还是自己保管session？
+	分三类：1.stand alone	SA	独立：登录单点，登出独立，自己保管session，不受其他系统登出影响（别人登出了不知道）,但能影响“同步”者。
+		2.real time	RT	实时：实时（Server push,Socket）向Server端校验session，一有系统退出就窗口提示。
+		3.every time	ET	每次：每次对子系统的操作，系统都会拿ticket到Server上去校验(每次访问就跳转到Server端校验，用户体验太差)
+4.三类中，最常用的应该是3.ET
+5.提供Filter(拦截过滤访问)，JSP标签（登出按钮，登录按钮，拦截过滤访问）
+6.退出的按钮，默认为SSO-S上的登录页面with Continue
+7.Continue or Referer
+8.Redis建立session会话池{key: username, value: session}，用于RT模式下Client与Server间的bind
+9.RT模式，子系统首次登录都要先跳转到SSO-S再跳回来，以建立对应的session.
+10.应该有两种退出方法：
+	1.跳转到SSO-S，退出后停留在登录页面
+	2.在原页面不变，直接向SSO-S发退出请求（如何实现，ajax跨域问题）
+		JSP退出标签，应该可配置，“退出后回到原页面”和“退出后停在SSO-S登录页面with Continue”
+
+### Question
+1.Apps是否保存自己的session?<br/>
+	是, 不然Server的访问量会太大。<br/>
+2.用户亲自去验证对子站的可访问性，还是子站通过RPC去验证站询问?<br/>
+	RPC<br/>
+3.在子应用运行时间长后,回来还有session吗?<br/>
+	有, Tell Server I am alive.<br/>
+4.server与client通讯加密如何作?<br/>
+	<br/>
+5.注销是否对server有效,其他子系统是否也要一起注销。<br/>
+	是,是<br/>
+6.如何防止违照的验证站返回?<br/>
+	use ticket.<br/>
+7.sso应该有个信任域名列表,用来判断App过来的ticket有效性，以及回跳的地址是否可靠。<br/>
+	是<br/>
+8.用户在子系统中的操作，session如何更新到主系统中，以防止主系统长时间session丢效，特别是RT类??<br/>
+9.是否提供www.google.com有页右上角那样的不跳转登出方式
